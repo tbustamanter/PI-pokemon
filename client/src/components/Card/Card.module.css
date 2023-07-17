@@ -1,0 +1,16 @@
+.card {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 7rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 21px 5px #2972B8;
+    height: 17rem;
+}
+.card img {
+    width: 42%;
+    position: relative;
+    top: -1rem;
+    max-height: 10rem;
+}
+.card h2{
+    margin: 0;
+}

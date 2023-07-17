@@ -1,0 +1,40 @@
+.container .logo {
+    height: 6rem;
+}
+.container{
+    background-color: rgb(255 255 255 / 25%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+}
+
+.container .home, .container .newPoke {
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid #fff;
+    cursor: pointer;
+    position: relative;
+    touch-action: manipulation;
+    font-weight: 700;
+    border-radius: 1rem;
+}
+
+.container .home:after, .container .newPoke:after {
+    content: "";
+  background-color: #FFCC01;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+  border-radius: 1rem;
+}
+.container .home:hover:after, .container .newPoke:hover:after {
+    top: 0px;
+  left: 0px;
+}

@@ -1,0 +1,34 @@
+.container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container form {
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 40px;
+    background-color: rgb(255 255 255 / 30%);
+    box-shadow: 0 0 21px 5px #2972B8;
+}
+.container form div {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 5rem 15rem;
+}
+
+.container .successMessage {
+    background-color: rgb(255 204 1 / 50%);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+  }
+  .container label.errors {
+    color: yellow;
+    grid-column: span 2;
+  }
