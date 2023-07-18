@@ -1,36 +1,13 @@
 import style from "./Cards.module.css";
 import Card from "../Card/Card";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setCurrentPage,
-  filterByType,
-  filterByOrigin,
-  order,
-} from "../../redux/actions";
+import { useSelector } from "react-redux";
+import DropDowns from "../DropDowns/DropDowns";
+import Pagination from "../Pagination/Pagination";
 
 const Cards = () => {
-  const { allPokemons, currentPage, itemsPerPage, types, filteredPokemons } =
+  const { allPokemons, currentPage, itemsPerPage, filteredPokemons } =
     useSelector((state) => state);
 
-  const dispatch = useDispatch();
-
-  const handlePageClick = (page) => {
-    dispatch(setCurrentPage(page));
-  };
-
-  const handleTypeChange = (event) => {
-    dispatch(filterByType(event.target.value));
-    dispatch(setCurrentPage(1));
-  };
-
-  const handleOriginChange = (event) => {
-     dispatch(filterByOrigin(event.target.value));
-  };
-  const handleOrderChange = (event) => {
-    
-    dispatch(order(event.target.value))
-    dispatch(setCurrentPage(1));
-  };
   let pokemonsToShow = [];
   filteredPokemons.length > 0
     ? (pokemonsToShow = filteredPokemons)
@@ -39,60 +16,9 @@ const Cards = () => {
   if (pokemonsToShow.length > 0) {
     return (
       <div className={style.container}>
-        <div className={style.dropdowns}>
-          <div className={style.filterType}>
-            <label>Filter by type: </label>
-            <select name="types" onChange={(event) => handleTypeChange(event)}>
-              {types.map((type) => (
-                <option key={type.id} value={type.name}>
-                  {type.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={style.filterOrigin}>
-            <label>Filter by Origin: </label>
-            <select
-              name="origin"
-              onChange={(event) => handleOriginChange(event)}
-            >
-              <option value="" disabled="disabled" selected>
-                Choose one
-              </option>
-              <option value="all">All</option>
-              <option value="API">API</option>
-              <option value="DB">DB</option>
-            </select>
-          </div>
-          <div className={style.orders}>
-            <label>Order by: </label>
-            <select
-              name="nombre"
-              onChange={(event) => handleOrderChange(event)}
-            >
-              <option value="" disabled="disabled" selected>
-                Choose one
-              </option>
-              <option value="asc">A - Z</option>
-              <option value="dsc">Z - A</option>
-              <option value="attack-asc">Attack ↑</option>
-              <option value="attack-dsc">Attack ↓</option>
-            </select>
-          </div>
-        </div>
-
-        <div className={style.pagination}>
-          {Array.from({ length: paginationSize }).map((_, index) => (
-            <div
-              onClick={(event) => handlePageClick(index + 1, event)}
-              className={currentPage === index + 1 ? style.actual : ""}
-              key={index + 1}
-              id={index + 1}
-            >
-              {index + 1}
-            </div>
-          ))}
-        </div>
+        <DropDowns />
+        <Pagination paginationSize={paginationSize}/>
+        
         <div className={style.cards}>
           {pokemonsToShow.map(({ id, name, image, types }, itemIndex) => {
             const lastIndex = itemsPerPage * currentPage - 1;
@@ -111,18 +37,7 @@ const Cards = () => {
             }
           })}
         </div>
-        <div className={style.pagination}>
-          {Array.from({ length: paginationSize }).map((_, index) => (
-            <div
-              onClick={() => handlePageClick(index + 1)}
-              className={currentPage === index + 1 ? style.actual : ""}
-              key={index + 1}
-              id={index + 1}
-            >
-              {index + 1}
-            </div>
-          ))}
-        </div>
+        <Pagination paginationSize={paginationSize}/>
       </div>
     );
   } else {

@@ -1,0 +1,15 @@
+.dropdowns {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    gap: 4rem;
+    color: white;
+
+}
+.dropdowns select {
+    height: 1.5rem;
+    box-shadow: 0 0 4px 2px #FFCC01;
+    border: 0;
+    border-radius: 0.5rem;
+}

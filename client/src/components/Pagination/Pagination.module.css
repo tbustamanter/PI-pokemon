@@ -1,0 +1,23 @@
+.pagination {
+    color: white;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    gap: 1rem;
+}
+.pagination div {
+    border-radius: 17px;
+    border: 1px solid;
+    width: 2rem;
+    padding: 5px;
+    box-shadow: 0 0 4px 1px #fff;
+    margin-bottom: 1rem;
+}
+.pagination div.actual {
+    box-shadow: 0 0 4px 1px #FFCC01;
+    border: 1px solid #FFCC01;
+}
+.pagination div:hover {
+    box-shadow: 0 0 4px 1px #FFCC01;
+    border: 1px solid #FFCC01;
+}
