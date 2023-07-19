@@ -1,4 +1,4 @@
-const { Pokemon, Type, pokemonsTypes } = require("../db");
+const { Pokemon } = require("../db");
 
 const postPokemon = async (req, res) => {
   try {
@@ -10,16 +10,17 @@ const postPokemon = async (req, res) => {
       hp,
       attack,
       defense,
-      speed,
-      height,
-      weight,
+      speed: speed ? speed : null,
+      height: height ? height : null,
+      weight: weight ? weight : null,
     });
-   
+
     if (typeId.length === 2) {
       await newPokemon.addType(typeId[0]);
       await newPokemon.addType(typeId[1]);
-    }else{
-        await newPokemon.addType(typeId[0]);
+    } else {
+      console.log(typeId);
+      await newPokemon.addType(typeId[0]);
     }
 
     const types = await newPokemon.getTypes();

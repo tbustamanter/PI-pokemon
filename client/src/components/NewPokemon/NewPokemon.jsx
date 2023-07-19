@@ -23,6 +23,8 @@ const NewPokemon = () => {
   });
   const [errors, setErrors] = useState({});
 
+  
+
   const handleChange = (event) => {
     const property = event.target.name;
     const val = event.target.value;
@@ -36,12 +38,11 @@ const NewPokemon = () => {
       errors.attack === ""
     ) {
       const button = document.querySelector("#submit");
-      //console.log(button);
       button.disabled = false;
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
     if (types.length === 0) {
       dispatch(getTypes());
     }
@@ -54,23 +55,40 @@ const NewPokemon = () => {
 
   const handleTypeChange = (event, index) => {
     const value = event.target.value;
-    setSelectedTypes((prevTypes) => {
-      const newTypes = [...prevTypes];
-      newTypes[index] = value;
-      return newTypes;
-    });
+    const name = event.target.name;
+    
+    let newTypes = [];
+    newTypes[index] = parseInt(value);
+
+    if (index === 0 && newPokeData.typeId[1] !== undefined) {
+      newTypes[1] = newPokeData.typeId[1];
+    }
+
+    if (index === 1 && newPokeData.typeId[0] !== undefined) {
+      newTypes[0] = newPokeData.typeId[0]
+    }
+
+    setNewPokeData({ ...newPokeData, typeId: newTypes });
   };
 
+
+  
+  const clearData =()=> {
+    document.querySelector("#addPokemon").reset();
+    setNewPokeData({name: "",
+    hp: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
+    typeId: [],
+    image: "",})
+    setSelectedTypes([]);
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const typeId = await selectedTypes.map((typeName) => {
-      const type = types.filter((typeBD) => typeBD.name === typeName);
-      return type[0].id;
-    });
-
-    setNewPokeData({ ...newPokeData, typeId: typeId });
-
+    
     if (
       errors.name === "" &&
       errors.hp === "" &&
@@ -89,12 +107,11 @@ const NewPokemon = () => {
         if (!response.ok) {
           throw new Error("Error al enviar los datos");
         }
-
         const data = await response.json();
-        event.target.reset();
+        clearData();  
         setSuccessMessage("Your Pokemon has been added successfully!");
       } catch (error) {
-        console.error(error);
+        window.alert(error);
       }
     }
   };
@@ -105,7 +122,7 @@ const NewPokemon = () => {
       {successMessage && (
         <div className={style.successMessage}>{successMessage}</div>
       )}
-      <form onSubmit={handleSubmit} name="addPokemon">
+      <form onSubmit={handleSubmit} id="addPokemon" name="addPokemon">
         <div className={style.name}>
           <label>* Name: </label>
           <input type="text" name="name" onChange={handleChange}></input>
@@ -144,11 +161,11 @@ const NewPokemon = () => {
             name={`type0`}
             onChange={(event) => handleTypeChange(event, 0)}
           >
-            <option value="" disabled="disabled" selected>
+            <option value="" >
               Choose one
             </option>
             {types.map((type) => (
-              <option key={type.id} value={type.name}>
+              <option key={type.id} value={type.id}>
                 {type.name}
               </option>
             ))}
@@ -158,11 +175,11 @@ const NewPokemon = () => {
               name={`type1`}
               onChange={(event) => handleTypeChange(event, 1)}
             >
-              <option value="" disabled="disabled" selected>
+              <option value="">
                 Choose one
               </option>
               {types.map((type) => (
-                <option key={type.id} value={type.name}>
+                <option key={type.id} value={type.id}>
                   {type.name}
                 </option>
               ))}

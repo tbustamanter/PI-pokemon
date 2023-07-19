@@ -13,7 +13,7 @@ const CardDetail = () => {
     dispatch(getPokemonBy(id));
   }, [id]);
   
-  if(selPokemon.id === +id){
+  if(selPokemon.id === id || selPokemon.id === +id){
   return (
     <div className={style.container}>
 

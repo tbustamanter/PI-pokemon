@@ -70,7 +70,7 @@ export const filterByName = (name) => {
     payload: name,
   };
 };
-export const filterByOrigin = (origin) => {
+export const filterByOrigin = origin => {
   return {
     type: FILTER_BY_ORIGIN,
     payload: origin,
