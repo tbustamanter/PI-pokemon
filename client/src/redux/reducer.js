@@ -58,7 +58,8 @@ const rootReducer = (state = initialState, action) => {
         };
       } else {
         window.alert("Pokemon not found");
-      }
+        return state;
+      };
 
     case FILTER_BY_ORIGIN:
       const origin = action.payload;
@@ -89,7 +90,7 @@ const rootReducer = (state = initialState, action) => {
           originFilter: state.allPokemons,
           filteredPokemons: state.allPokemons,
         };
-      }
+      };
     case FILTER_BY_TYPE:
       let typeFilter = [];
 
@@ -108,7 +109,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           filteredPokemons: typeFilter,
         };
-      }
+      };
 
     case ORDER_BY:
       let ordering = [];

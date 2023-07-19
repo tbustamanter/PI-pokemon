@@ -5,9 +5,12 @@ import DropDowns from "../DropDowns/DropDowns";
 import Pagination from "../Pagination/Pagination";
 
 const Cards = () => {
-  const { allPokemons, currentPage, itemsPerPage, filteredPokemons } =
-    useSelector((state) => state);
+  const allPokemons = useSelector(state => state.allPokemons);
+  const currentPage = useSelector(state => state.currentPage);
+  const itemsPerPage = useSelector(state => state.itemsPerPage);
+  const filteredPokemons = useSelector(state => state.filteredPokemons);
 
+  console.log(filteredPokemons);
   let pokemonsToShow = [];
   filteredPokemons.length > 0
     ? (pokemonsToShow = filteredPokemons)
