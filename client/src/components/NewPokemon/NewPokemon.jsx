@@ -185,7 +185,7 @@ useEffect(() => {
               ))}
             </select>
           ) : null}
-          <label onClick={addType}>
+          <label className={style.addType} onClick={addType}>
             {!newType ? "Add Type" : "Remove Type"}
           </label>
         </div>

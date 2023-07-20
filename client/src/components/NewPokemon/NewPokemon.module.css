@@ -32,3 +32,11 @@
     color: yellow;
     grid-column: span 2;
   }
+  .container .addType {
+    cursor: pointer;
+    color: #FFCC01;
+    font-weight: 700;
+    background-color: #2972B8;
+    border-radius: 8px;
+    padding: 6px 4px;
+  }
